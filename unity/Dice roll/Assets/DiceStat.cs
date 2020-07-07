@@ -14,11 +14,22 @@ public class DiceStat : MonoBehaviour
 
     Vector3 initPos;
 
+    void RandomiseRotation()
+    {
+        var euler = transform.eulerAngles;
+        euler.x = Random.Range(0.0f, 360.0f);
+        euler.y = Random.Range(0.0f, 360.0f);
+        euler.z = Random.Range(0.0f, 360.0f);
+        transform.eulerAngles = euler;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         initPos = transform.position;
         rb.useGravity = false;
+
+        RandomiseRotation();
     }
     
     void Update()
@@ -39,6 +50,7 @@ public class DiceStat : MonoBehaviour
         }
     }
     void RollDice(){
+
         if(!thrown && !hasLanded){
             thrown = true;
             rb.useGravity = true;
@@ -67,6 +79,9 @@ public class DiceStat : MonoBehaviour
     
     void Reset(){
         transform.position = initPos;
+
+        RandomiseRotation();
+
         thrown = false;
         hasLanded = false;
         rb.useGravity = false;
@@ -89,8 +104,8 @@ public class DiceStat : MonoBehaviour
             yPositions[i] = diceSides[i].position.y;
         }
 
-        side = MaxValue(yPositions);
-        Debug.Log("Dice landed on " + (side + 1));
+        side = MaxValue(yPositions) + 1;
+        Debug.Log("Dice landed on " + side);
     }
     
 }
