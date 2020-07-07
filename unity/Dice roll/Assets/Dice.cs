@@ -27,7 +27,7 @@ public class Dice : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             RollDice();
         }
-
+        //Checks dice side value if the dice is stationary and has been thrown
         if(rb.IsSleeping() && !hasLanded && thrown){
             hasLanded = true;
             rb.useGravity = false;
@@ -50,8 +50,8 @@ public class Dice : MonoBehaviour
             Reset();
         }
     }
-    void Reset()
-    {
+    
+    void Reset(){
         transform.position = initPos;
         thrown = false;
         hasLanded = false;
