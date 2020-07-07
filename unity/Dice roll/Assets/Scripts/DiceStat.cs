@@ -40,7 +40,7 @@ public class DiceStat : MonoBehaviour
         //Checks dice side value if the dice is stationary and has been thrown
         if(rb.IsSleeping() && !hasLanded && thrown){
             hasLanded = true;
-            rb.useGravity = false;
+            rb.useGravity = true;
             CheckDiceSide();
         
         }
@@ -55,6 +55,7 @@ public class DiceStat : MonoBehaviour
             thrown = true;
             rb.useGravity = true;
             rb.AddTorque(Random.Range(0, 500),Random.Range(0,500), Random.Range(0,500));
+            rb.AddForce(10, 0, 0, ForceMode.Impulse);
         }
 
         else if(thrown && hasLanded){
