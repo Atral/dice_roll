@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class DiceStat : MonoBehaviour
 {
+    Vector2 startPos, endPos, direction; // touch start position, touch end position, swipe direction
+	float touchTimeStart, touchTimeFinish, timeInterval; // to calculate swipe time to control throw force in Z direction
+    
     [SerializeField] Transform[] diceSides;
+
     public int side = 0;
     Rigidbody rb;
     
@@ -13,6 +17,10 @@ public class DiceStat : MonoBehaviour
     bool thrown;
 
     Vector3 initPos;
+
+    float x;
+    float y;
+    float z;
 
     void RandomiseRotation()
     {
@@ -34,9 +42,36 @@ public class DiceStat : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)){
+        // if you touch the screen
+		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
+
+			// getting touch position and marking time when you touch the screen
+			touchTimeStart = Time.time;
+			startPos = Input.GetTouch (0).position;
+		}
+
+		// if you release your finger
+		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Ended) {
+			rb.useGravity = true;
+			// marking time when you release it
+			touchTimeFinish = Time.time;
+
+			// calculate swipe time interval 
+			timeInterval = touchTimeFinish - touchTimeStart;
+
+			// getting release finger position
+			endPos = Input.GetTouch (0).position;
+
+			// calculating swipe direction in 2D space
+			direction = endPos - startPos;
+            x = direction[1];
+            y = direction[0];
+
+			// add force to balls rigidbody in 3D space depending on swipe time, direction and throw forces
+			rb.isKinematic = false;
             RollDice();
-        }
+            }
+            
         //Checks dice side value if the dice is stationary and has been thrown
         if(rb.IsSleeping() && !hasLanded && thrown){
             hasLanded = true;
@@ -50,12 +85,12 @@ public class DiceStat : MonoBehaviour
         }
     }
     void RollDice(){
+        Vector3 newDist = new Vector3(0.3f * x, 0, -0.3f * y);
 
         if(!thrown && !hasLanded){
             thrown = true;
             rb.useGravity = true;
-            rb.AddTorque(Random.Range(0, 500),Random.Range(0,500), Random.Range(0,500));
-            rb.AddForce(10, 0, 0, ForceMode.Impulse);
+            rb.AddForce(newDist / timeInterval);
         }
 
         else if(thrown && hasLanded){

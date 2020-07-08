@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -36,7 +36,7 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 1.9172736, g: 0.5549737, b: 2, a: 1}
+    value: {r: 2.670157, g: 1.396949, b: 0, a: 1}
   fastMode:
     overrideState: 0
     value: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: -441916283978741199}
   - {fileID: 7590927958354320876}
   - {fileID: 2458142519452991171}
+  - {fileID: 6064872171151313162}
 --- !u!114 &2458142519452991171
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -75,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cb7e9e120078f43bce4f0b1be547a7, type: 3}
   m_Name: AmbientOcclusion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -102,7 +103,7 @@ MonoBehaviour:
     value: -12
   thicknessModifier:
     overrideState: 1
-    value: 1.56
+    value: 3.34
   directLightingStrength:
     overrideState: 0
     value: 0
@@ -112,6 +113,43 @@ MonoBehaviour:
   quality:
     overrideState: 0
     value: 2
+--- !u!114 &6064872171151313162
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a34fa72bd4185749832024e9c8010bf, type: 3}
+  m_Name: ScreenSpaceReflections
+  m_EditorClassIdentifier: 
+  active: 0
+  enabled:
+    overrideState: 1
+    value: 1
+  preset:
+    overrideState: 1
+    value: 6
+  maximumIterationCount:
+    overrideState: 0
+    value: 16
+  resolution:
+    overrideState: 0
+    value: 0
+  thickness:
+    overrideState: 0
+    value: 8
+  maximumMarchDistance:
+    overrideState: 0
+    value: 100
+  distanceFade:
+    overrideState: 0
+    value: 1
+  vignette:
+    overrideState: 0
+    value: 0
 --- !u!114 &7590927958354320876
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -124,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
