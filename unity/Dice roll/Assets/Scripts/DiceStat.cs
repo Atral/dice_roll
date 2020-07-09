@@ -71,7 +71,16 @@ public class DiceStat : MonoBehaviour
 			rb.isKinematic = false;
             RollDice();
             }
-            
+        
+        else if(Input.GetKeyDown(KeyCode.Space))
+        {
+            x = 25f;
+            y = 0.0f;
+            z = 0.0f;
+            timeInterval = 1;
+            RollDice();
+        }
+
         //Checks dice side value if the dice is stationary and has been thrown
         if(rb.IsSleeping() && !hasLanded && thrown){
             hasLanded = true;

@@ -499,7 +499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7361364237776777036}
   m_LocalRotation: {x: 0.92297995, y: 0.23686063, z: -0.016763406, w: 0.30285993}
-  m_LocalPosition: {x: -2.73, y: 2.93, z: -1.93}
+  m_LocalPosition: {x: -3, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8902620788152860756}
@@ -595,9 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab255a871cc868a4da91752c08992116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForceInX: 10
-  throwForceInY: 1
-  throwForceInZ: 1
   diceSides:
   - {fileID: 6309594558419322837}
   - {fileID: 2576797558881428604}
