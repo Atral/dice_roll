@@ -88,7 +88,7 @@ public class DiceStat : MonoBehaviour
             RollAgain();
         }
     }
-    void RollDice(){
+    public void RollDice(){
         Vector3 newDist = new Vector3(0.3f * x, 0, -0.3f * y);
 
         if(!thrown && !hasLanded){
@@ -117,7 +117,8 @@ public class DiceStat : MonoBehaviour
         return location;
     }
     
-    void Reset(){
+    public void Reset(){
+        rb = GetComponent<Rigidbody>();
         transform.position = initPos;
 
         RandomiseRotation();

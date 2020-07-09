@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - DiceStat
     - FPS
+    - RemoveButton
     - SpawnButton
     - UnityTemplateProjects.SimpleCameraController
     Unity.Postprocessing.Runtime.dll:
@@ -112,6 +113,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13118}
     - Class: 114
       Script: {instanceID: 13198}
+    - Class: 114
+      Script: {instanceID: 20626}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -715,6 +718,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 78460ad2ed499311e3bb8de5982f7f44
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RemoveButton
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
