@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 public class DiceStat : MonoBehaviour
 {
     Vector2 startPos, endPos, direction; // touch start position, touch end position, swipe direction
@@ -52,7 +51,6 @@ public class DiceStat : MonoBehaviour
 
 		// if you release your finger
 		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Ended) {
-			rb.useGravity = true;
 			// marking time when you release it
 			touchTimeFinish = Time.time;
 
@@ -69,16 +67,13 @@ public class DiceStat : MonoBehaviour
 
 			// add force to balls rigidbody in 3D space depending on swipe time, direction and throw forces
 			rb.isKinematic = false;
-            RollDice();
+            
+            if ((Mathf.Abs(direction[0])+ Mathf.Abs(direction[1])) > 100.0f)
+            {
+                RollDice();
+
             }
-        
-        else if(Input.GetKeyDown(KeyCode.Space))
-        {
-            x = 25f;
-            y = 0.0f;
-            z = 0.0f;
-            timeInterval = 1;
-            RollDice();
+            
         }
 
         //Checks dice side value if the dice is stationary and has been thrown

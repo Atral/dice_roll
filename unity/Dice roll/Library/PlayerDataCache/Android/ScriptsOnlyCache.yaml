@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - DiceStat
     - FPS
+    - SpawnButton
     - UnityTemplateProjects.SimpleCameraController
     Unity.Postprocessing.Runtime.dll:
     - UnityEngine.Rendering.PostProcessing.AmbientOcclusion
@@ -33,6 +34,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/SampleScene.unity:
@@ -81,6 +83,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11400}
     - Class: 114
+      Script: {instanceID: 11402}
+    - Class: 114
       Script: {instanceID: 11440}
     - Class: 114
       Script: {instanceID: 11524}
@@ -97,15 +101,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12298}
     - Class: 114
-      Script: {instanceID: 12690}
+      Script: {instanceID: 12632}
     - Class: 114
-      Script: {instanceID: 12820}
+      Script: {instanceID: 12692}
     - Class: 114
-      Script: {instanceID: 13074}
+      Script: {instanceID: 12822}
     - Class: 114
-      Script: {instanceID: 13116}
+      Script: {instanceID: 13076}
     - Class: 114
-      Script: {instanceID: 13196}
+      Script: {instanceID: 13118}
+    - Class: 114
+      Script: {instanceID: 13198}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -541,6 +547,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: a84a966faa9fb22ae81993e2d46b6b20
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpawnButton
   - hash:
       serializedVersion: 2
       Hash: 8860633d29a22ff64e02e18da3716cdf

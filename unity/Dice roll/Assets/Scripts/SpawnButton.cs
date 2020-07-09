@@ -9,7 +9,7 @@ public class SpawnButton : MonoBehaviour
 
     public void Button_Click()
     {   
-        Debug.Log("Button Clicked");
+        Debug.Log("Spawning dice");
         bool spawned = false;
         Vector3[] positionArray = new [] {
             new Vector3(-3.0f, 2.0f, 0.0f), new Vector3(-3.0f, 2.0f, -2.0f),
@@ -19,7 +19,7 @@ public class SpawnButton : MonoBehaviour
             new Vector3(-3.0f, 4.0f, -4.0f), new Vector3(-3.0f, 4.0f, 4.0f)
             };
         
-        var radius = 0.7f;
+        var radius = 0.6f;
         int i = 0;
 
         while(i < positionArray.Length && !spawned){
