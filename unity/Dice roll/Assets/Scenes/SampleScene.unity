@@ -450,7 +450,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.5442e-41, z: 0, w: 7.7371252e+25}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1.241e-41}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 440017398}
   - component: {fileID: 440017402}
   - component: {fileID: 440017403}
+  - component: {fileID: 440017404}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -642,6 +643,7 @@ RectTransform:
   - {fileID: 1504550}
   - {fileID: 2111723783}
   - {fileID: 1122475975}
+  - {fileID: 556607655}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -663,6 +665,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dice: {fileID: 3353348204472571069, guid: c4230e7f02024b040bdd1cb1699edba5, type: 3}
+  dices: []
+  positionArray:
+  - {x: -3, y: 2, z: 0}
+  - {x: -3, y: 2, z: -2}
+  - {x: -3, y: 2, z: 2}
+  - {x: -3, y: 4, z: 0}
+  - {x: -3, y: 4, z: -2}
+  - {x: -3, y: 4, z: 2}
+  - {x: -3, y: 2, z: -4}
+  - {x: -3, y: 2, z: 4}
+  - {x: -3, y: 4, z: -4}
+  - {x: -3, y: 4, z: 4}
 --- !u!114 &440017403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +692,18 @@ MonoBehaviour:
   dice: {fileID: 2720927066818629127, guid: c4230e7f02024b040bdd1cb1699edba5, type: 3}
   dices: []
   TagField: d20
+--- !u!114 &440017404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440017397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e38ddc8bbf5dd143898f7f18bfa600e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &474858897
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +782,84 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474858897}
+  m_CullTransparentMesh: 0
+--- !u!1 &556607654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 556607655}
+  - component: {fileID: 556607657}
+  - component: {fileID: 556607656}
+  m_Layer: 5
+  m_Name: DiceTotal
+  m_TagString: DiceTotal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &556607655
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556607654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 440017401}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00001812, y: 0.000019073}
+  m_SizeDelta: {x: 167.91809, y: 128.99657}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &556607656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556607654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 56
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 56
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &556607657
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556607654}
   m_CullTransparentMesh: 0
 --- !u!1 &588704841
 GameObject:
@@ -867,7 +971,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.5582e-41, z: 0, w: NaN}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1421,9 +1525,10 @@ GameObject:
   - component: {fileID: 1122475978}
   - component: {fileID: 1122475977}
   - component: {fileID: 1122475976}
+  - component: {fileID: 1122475979}
   m_Layer: 5
   m_Name: Reset
-  m_TagString: Untagged
+  m_TagString: resetButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1539,6 +1644,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122475974}
   m_CullTransparentMesh: 0
+--- !u!114 &1122475979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122475974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9f240bcc1bc8b42b7eb41764307e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dice: {fileID: 0}
+  dices: []
+  positionArray:
+  - {x: -3, y: 2, z: 0}
+  - {x: -3, y: 2, z: -2}
+  - {x: -3, y: 2, z: 2}
+  - {x: -3, y: 4, z: 0}
+  - {x: -3, y: 4, z: -2}
+  - {x: -3, y: 4, z: 2}
+  - {x: -3, y: 2, z: -4}
+  - {x: -3, y: 2, z: 4}
+  - {x: -3, y: 4, z: -4}
+  - {x: -3, y: 4, z: 4}
 --- !u!1 &1161177155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2403,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.5717e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 2.489e-42, w: 5.9e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0

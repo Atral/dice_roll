@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 public class DiceStat : MonoBehaviour
 {
     Vector2 startPos, endPos, direction; // touch start position, touch end position, swipe direction
@@ -9,7 +10,13 @@ public class DiceStat : MonoBehaviour
     
     [SerializeField] Transform[] diceSides;
 
+    //Initialising variables for the display of dice values
     public int side = 0;
+    int sideTotal;
+    Text totalDisplay;
+    Canvas canvas;
+    DiceTotal total;
+
     Rigidbody rb;
     
     bool hasLanded;
@@ -21,6 +28,17 @@ public class DiceStat : MonoBehaviour
     float y;
     float z;
 
+    public Button reset;
+
+    //Array of potential dice start positions
+    public List<Vector3> positionArray = new List<Vector3>(){
+    new Vector3(-3.0f, 2.0f, 0.0f), new Vector3(-3.0f, 2.0f, -2.0f),
+    new Vector3(-3.0f, 2.0f, 2.0f), new Vector3(-3.0f, 4.0f, 0.0f),
+    new Vector3(-3.0f, 4.0f, -2.0f), new Vector3(-3.0f, 4.0f, 2.0f),
+    new Vector3(-3.0f, 2.0f, -4.0f), new Vector3(-3.0f, 2.0f, 4.0f),
+    new Vector3(-3.0f, 4.0f, -4.0f), new Vector3(-3.0f, 4.0f, 4.0f)
+    };
+
     void RandomiseRotation()
     {
         var euler = transform.eulerAngles;
@@ -31,12 +49,20 @@ public class DiceStat : MonoBehaviour
     }
 
     void Start()
-    {
+    {   
+        sideTotal = 0;
         rb = GetComponent<Rigidbody>();
         initPos = transform.position;
         rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezePosition;
 
         RandomiseRotation();
+
+        Button resetButton = GameObject.FindGameObjectWithTag("resetButton").GetComponent<Button>();
+		resetButton.onClick.AddListener(() => Reset());
+
+        totalDisplay = GameObject.FindGameObjectWithTag("DiceTotal").GetComponent<Text>();
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
     }
     
     void Update()
@@ -67,12 +93,7 @@ public class DiceStat : MonoBehaviour
 
 			// add force to balls rigidbody in 3D space depending on swipe time, direction and throw forces
 			rb.isKinematic = false;
-            
-            if ((Mathf.Abs(direction[0])+ Mathf.Abs(direction[1])) > 100.0f)
-            {
-                RollDice();
-
-            }
+            RollDice();
             
         }
 
@@ -80,6 +101,7 @@ public class DiceStat : MonoBehaviour
         if(rb.IsSleeping() && !hasLanded && thrown){
             hasLanded = true;
             rb.useGravity = true;
+            rb.constraints = RigidbodyConstraints.None;
             CheckDiceSide();
         
         }
@@ -91,14 +113,15 @@ public class DiceStat : MonoBehaviour
     public void RollDice(){
         Vector3 newDist = new Vector3(0.3f * x, 0, -0.3f * y);
 
-        if(!thrown && !hasLanded){
+        if(!thrown && !hasLanded && ((Mathf.Abs(direction[0])+ Mathf.Abs(direction[1])) > 100.0f)){
             thrown = true;
             rb.useGravity = true;
+            rb.constraints = RigidbodyConstraints.None;
             rb.AddForce(newDist / timeInterval);
         }
 
         else if(thrown && hasLanded){
-            Reset();
+            Debug.Log("Still rolling");
         }
     }
 
@@ -118,14 +141,41 @@ public class DiceStat : MonoBehaviour
     }
     
     public void Reset(){
-        rb = GetComponent<Rigidbody>();
-        transform.position = initPos;
+
+        float radius = 0.6f;
+        int i = 0;
+        bool moved = false;
+
+        totalDisplay.text = "";
+        canvas.GetComponent<DiceTotal>().resetTotal();
+
+        if(!(Physics.CheckSphere (initPos, radius))){
+            transform.position = initPos;
+
+        }else{
+            while(i < positionArray.Count && !moved){
+
+                if (!(Physics.CheckSphere (positionArray[i], radius))) {
+                    
+                    Debug.Log("Spawn point found");
+                    transform.position = positionArray[i];
+                    moved = true;
+
+                } else {
+                    i++;
+                }
+            }
+        }
 
         RandomiseRotation();
 
         thrown = false;
         hasLanded = false;
         rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezePosition;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        sideTotal = 0;
     }
 
     void RollAgain(){
@@ -147,6 +197,9 @@ public class DiceStat : MonoBehaviour
 
         side = MaxValue(yPositions) + 1;
         Debug.Log("Dice landed on " + side);
+
+
+        canvas.GetComponent<DiceTotal>().setTotal(side);
     }
     
 }

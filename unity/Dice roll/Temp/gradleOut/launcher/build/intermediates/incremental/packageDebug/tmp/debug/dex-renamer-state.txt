@@ -1,0 +1,4 @@
+#Fri Jul 10 14:06:52 BST 2020
+base.0=C\:\\Users\\Jack\\Documents\\GitHub\\dice_lads\\unity\\Dice roll\\Temp\\gradleOut\\launcher\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

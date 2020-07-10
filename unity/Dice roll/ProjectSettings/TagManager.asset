@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - d20
   - dice
+  - resetButton
+  - DiceTotal
   layers:
   - Default
   - TransparentFX
