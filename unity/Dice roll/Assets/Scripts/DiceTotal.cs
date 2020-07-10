@@ -17,7 +17,7 @@ public class DiceTotal : MonoBehaviour
     public void setTotal(int diceValue)
     {
         diceTotal += diceValue;
-        totalDisplay.text = diceTotal.ToString();
+        totalDisplay.text = "Total: " + diceTotal.ToString();
     }
 
     public void resetTotal(){

@@ -16,7 +16,7 @@ public class DiceStat : MonoBehaviour
     Canvas canvas;
     DiceTotal total;
 
-    public Camera camera;
+    public Camera mainCamera;
 
     Rigidbody rb;
     
@@ -64,6 +64,7 @@ public class DiceStat : MonoBehaviour
 
         totalDisplay = GameObject.FindGameObjectWithTag("DiceTotal").GetComponent<Text>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
     }
     
     void Update()
@@ -148,6 +149,7 @@ public class DiceStat : MonoBehaviour
         bool moved = false;
 
         totalDisplay.text = "";
+        mainCamera.GetComponent<Zoom>().ResetCamera();
         canvas.GetComponent<DiceTotal>().resetTotal();
 
         if(!(Physics.CheckSphere (initPos, radius))){
@@ -189,6 +191,9 @@ public class DiceStat : MonoBehaviour
 
     void CheckDiceSide()
     {   
+        rb.constraints = RigidbodyConstraints.FreezePosition;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        
         double[] yPositions = new double[diceSides.Length];
 
         for(int i = 0; i < diceSides.Length; i++)
@@ -199,8 +204,8 @@ public class DiceStat : MonoBehaviour
         side = MaxValue(yPositions) + 1;
         Debug.Log("Dice landed on " + side);
 
-
         canvas.GetComponent<DiceTotal>().setTotal(side);
+        mainCamera.GetComponent<Zoom>().CenterCamera();
     }
     
     
