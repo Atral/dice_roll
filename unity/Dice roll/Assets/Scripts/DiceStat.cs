@@ -10,12 +10,13 @@ public class DiceStat : MonoBehaviour
     
     [SerializeField] Transform[] diceSides;
 
-    //Initialising variables for the display of dice values
     public int side = 0;
     int sideTotal;
     Text totalDisplay;
     Canvas canvas;
     DiceTotal total;
+
+    public Camera camera;
 
     Rigidbody rb;
     
@@ -201,5 +202,6 @@ public class DiceStat : MonoBehaviour
 
         canvas.GetComponent<DiceTotal>().setTotal(side);
     }
+    
     
 }
