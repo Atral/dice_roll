@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class DiceStat : MonoBehaviour
 {
     Vector2 startPos, endPos, direction; // touch start position, touch end position, swipe direction
@@ -10,21 +11,30 @@ public class DiceStat : MonoBehaviour
     
     [SerializeField] Transform[] diceSides;
 
+    //the value of the side that the dice landed on
     public int side = 0;
+    //the total of all the dice values
     int sideTotal;
+
+    //initialising the display of the total
     Text totalDisplay;
     Canvas canvas;
     DiceTotal total;
+
+    bool stationary;
+    GameObject[] diceList;
 
     public Camera mainCamera;
 
     Rigidbody rb;
     
+    //stores the state of the dice
     bool hasLanded;
     bool thrown;
 
     Vector3 initPos;
 
+    //co-ordinates
     float x;
     float y;
     float z;
@@ -40,6 +50,7 @@ public class DiceStat : MonoBehaviour
     new Vector3(-3.0f, 4.0f, -4.0f), new Vector3(-3.0f, 4.0f, 4.0f)
     };
 
+    //randomises the orientation of the dice so that the roll is fair
     void RandomiseRotation()
     {
         var euler = transform.eulerAngles;
@@ -53,15 +64,20 @@ public class DiceStat : MonoBehaviour
     {   
         sideTotal = 0;
         rb = GetComponent<Rigidbody>();
+        //Stores the inital position of the dice
         initPos = transform.position;
+
+        //disables gravity and freezes the dice ready for throwing
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezePosition;
 
         RandomiseRotation();
 
+        //initialises the reset button
         Button resetButton = GameObject.FindGameObjectWithTag("resetButton").GetComponent<Button>();
 		resetButton.onClick.AddListener(() => Reset());
 
+        //initialises the total
         totalDisplay = GameObject.FindGameObjectWithTag("DiceTotal").GetComponent<Text>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
@@ -69,6 +85,19 @@ public class DiceStat : MonoBehaviour
     
     void Update()
     {
+        //Finds the dice and adds them to a list
+        diceList = GameObject.FindGameObjectsWithTag("d20");
+
+        stationary = true;
+
+        foreach(GameObject dice in diceList)
+        {
+            if(!dice.GetComponent<Rigidbody>().IsSleeping()){
+                stationary = false;
+            }
+        }
+
+
         // if you touch the screen
 		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
 
@@ -142,6 +171,7 @@ public class DiceStat : MonoBehaviour
         return location;
     }
     
+    //returns dice to the start position
     public void Reset(){
 
         float radius = 0.6f;
@@ -158,6 +188,7 @@ public class DiceStat : MonoBehaviour
         }else{
             while(i < positionArray.Count && !moved){
 
+                //checks if there is already a dice in that location
                 if (!(Physics.CheckSphere (positionArray[i], radius))) {
                     
                     Debug.Log("Spawn point found");
@@ -172,12 +203,14 @@ public class DiceStat : MonoBehaviour
 
         RandomiseRotation();
 
+        //resets booleans and freezes dice
         thrown = false;
         hasLanded = false;
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezePosition;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
+        //resets dice total
         sideTotal = 0;
     }
 
@@ -191,6 +224,7 @@ public class DiceStat : MonoBehaviour
 
     void CheckDiceSide()
     {   
+        //freezes dice before counting
         rb.constraints = RigidbodyConstraints.FreezePosition;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         
@@ -205,7 +239,11 @@ public class DiceStat : MonoBehaviour
         Debug.Log("Dice landed on " + side);
 
         canvas.GetComponent<DiceTotal>().setTotal(side);
-        mainCamera.GetComponent<Zoom>().CenterCamera();
+
+        if(stationary)
+        {
+            mainCamera.GetComponent<Zoom>().CenterCamera();
+        }
     }
     
     
