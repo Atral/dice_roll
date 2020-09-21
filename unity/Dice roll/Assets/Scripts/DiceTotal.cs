@@ -11,17 +11,24 @@ public class DiceTotal : MonoBehaviour
     public void Start(){
         diceTotal = 0;
         totalDisplay = GameObject.FindGameObjectWithTag("DiceTotal").GetComponent<Text>();
+        totalDisplay.enabled = false;
 
     }
 
     public void setTotal(int diceValue)
     {
         diceTotal += diceValue;
-        totalDisplay.text = "Total: " + diceTotal.ToString();
+        totalDisplay.text = diceTotal.ToString();
+    }
+
+    public void showTotal()
+    {
+        totalDisplay.enabled = true;
     }
 
     public void resetTotal(){
         diceTotal = 0;
+        totalDisplay.enabled = false;
     }
 
 }

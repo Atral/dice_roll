@@ -239,11 +239,13 @@ public class DiceStat : MonoBehaviour
         Debug.Log("Dice landed on " + side);
 
         canvas.GetComponent<DiceTotal>().setTotal(side);
+        
 
         // Moves dice and camera if all are stationary
         if(stationary)
         {
             mainCamera.GetComponent<Zoom>().CenterCamera();
+            canvas.GetComponent<DiceTotal>().showTotal();
         }
     }
     
