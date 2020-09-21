@@ -240,6 +240,7 @@ public class DiceStat : MonoBehaviour
 
         canvas.GetComponent<DiceTotal>().setTotal(side);
 
+        // Moves dice and camera if all are stationary
         if(stationary)
         {
             mainCamera.GetComponent<Zoom>().CenterCamera();

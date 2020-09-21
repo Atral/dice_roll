@@ -6,12 +6,14 @@ using System;
 public class Zoom : MonoBehaviour
 {   
     Vector3 groundOffset;
-    Vector3 target = new Vector3(2.0f, 1.39f, 2.0f);
     Vector3 camSmoothDamp;
     Vector3 initCamPos;
     Quaternion initRot;
     GameObject[] dices;
     string TagField;
+
+    public Vector3 target;
+    public float speed = 1.0f;
 
     List<Vector3> positionArray = new List<Vector3>()
     {
@@ -26,6 +28,7 @@ public class Zoom : MonoBehaviour
         // Stores camera starting position
         initCamPos = transform.position;
         initRot = transform.rotation;
+        target = initCamPos;
     }
     
     public void Update()
@@ -33,6 +36,13 @@ public class Zoom : MonoBehaviour
         // Finds all the dice
         TagField = "d20";
         dices = GameObject.FindGameObjectsWithTag(TagField);
+
+        if(target != null)
+        {
+            float step =  speed*10 * Time.deltaTime; // calculate distance to move
+            transform.position = Vector3.MoveTowards(transform.position, target, step);
+        }
+        
     }
 
     // Centers the camera on the dice
@@ -85,7 +95,7 @@ public class Zoom : MonoBehaviour
         groundOffset = new Vector3(0.0f, yOff, 0.0f);
 
         //Changes camera position and rotation
-        transform.position = center - groundOffset;
+        target = center - groundOffset;
         transform.eulerAngles = euler;
     }
 
@@ -93,5 +103,6 @@ public class Zoom : MonoBehaviour
     {
         transform.position = initCamPos;
         transform.rotation = initRot;
+        target = initCamPos;
     }
 }
