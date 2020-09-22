@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class Zoom : MonoBehaviour
 {   
@@ -15,12 +16,12 @@ public class Zoom : MonoBehaviour
     public Vector3 target;
     public float speed = 1.0f;
 
-    List<Vector3> positionArray = new List<Vector3>()
-    {
+        List<Vector3> positionArray = new List<Vector3>(){
         new Vector3(0.0f, 1.39f, 0f), new Vector3(0.0f, 1.39f, -2.0f),  new Vector3(0.0f, 1.39f, 2.0f),
         new Vector3(2.0f, 1.39f, 0f), new Vector3(2.0f, 1.39f, -2.0f), new Vector3(2.0f, 1.39f, 2.0f),
         new Vector3(4.0f, 1.39f, 0f), new Vector3(4.0f, 1.39f, -2.0f), new Vector3(4.0f, 1.39f, 2.0f),
-    };
+        };
+
 
     // Start is called before the first frame update
     public void Start()
@@ -48,34 +49,19 @@ public class Zoom : MonoBehaviour
     // Centers the camera on the dice
     public void CenterCamera()
     {
-
-        List<Vector3> tempPos;
-        tempPos = positionArray;
-        Debug.Log(tempPos);
-
         var euler = transform.eulerAngles;
         euler.x = 90.0f;
         euler.y = 90.0f;
         euler.z = 0.0f;
 
-        if(dices.Length > 0)
-        {
-            for(int i = 0; i < dices.Length; i++){
-
-                dices[i].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-                dices[i].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                dices[i].transform.position = positionArray[i];
-            }
-        }
-
         //Calcuates the correct camrea position depending on the number of dice
+        IEnumerable<Vector3> usedPos = positionArray.Take(dices.Length);
         Vector3 totalPosition = new Vector3(0,0,0);
         
-        foreach(GameObject dice in dices)
+        foreach(Vector3 pos in usedPos)
         {
-            totalPosition += dice.transform.position;
+            totalPosition += pos;
         }
-        Vector3 center = totalPosition / dices.Length;
 
         float yOff;
         float xOff = 0;
@@ -99,6 +85,7 @@ public class Zoom : MonoBehaviour
         }
 
         groundOffset = new Vector3(0.0f, yOff, xOff);
+        Vector3 center = totalPosition / dices.Length;
 
         //Changes camera position and rotation
         target = center - groundOffset;

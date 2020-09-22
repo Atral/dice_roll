@@ -450,7 +450,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.3985e-41, z: 0, w: 988}
+  m_BoundingSphereOverride: {x: 0, y: 1.7415e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 440017402}
   - component: {fileID: 440017403}
   - component: {fileID: 440017404}
+  - component: {fileID: 440017405}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -704,6 +705,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e38ddc8bbf5dd143898f7f18bfa600e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &440017405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440017397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d7a4c48c81373409598d4ca7bd3302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &474858897
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +853,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4beb055f07aaff244873dec698d0363e, type: 3}
     m_FontSize: 56
     m_FontStyle: 1
     m_BestFit: 0
@@ -971,7 +984,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.116e-41, z: 0, w: 988}
+  m_BoundingSphereOverride: {x: 0, y: 1.5145e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2418,7 +2431,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.3856e-41, z: 0, w: 988}
+  m_BoundingSphereOverride: {x: 0, y: 1.5173e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0

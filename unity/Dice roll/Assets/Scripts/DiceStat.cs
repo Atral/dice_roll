@@ -97,7 +97,6 @@ public class DiceStat : MonoBehaviour
             }
         }
 
-
         // if you touch the screen
 		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
 
@@ -177,10 +176,17 @@ public class DiceStat : MonoBehaviour
         float radius = 0.6f;
         int i = 0;
         bool moved = false;
+        canvas.GetComponent<Move>().StopMoving();
 
         totalDisplay.text = "";
         mainCamera.GetComponent<Zoom>().ResetCamera();
         canvas.GetComponent<DiceTotal>().resetTotal();
+
+        //Re-enables collision
+        foreach(GameObject dice in diceList){
+            Rigidbody body = dice.GetComponent<Rigidbody>();
+            body.detectCollisions = true;
+        }
 
         if(!(Physics.CheckSphere (initPos, radius))){
             transform.position = initPos;
@@ -244,6 +250,9 @@ public class DiceStat : MonoBehaviour
         // Moves dice and camera if all are stationary
         if(stationary)
         {
+            Debug.Log("Positioning Dice");
+            canvas.GetComponent<Move>().PositionDice();
+
             mainCamera.GetComponent<Zoom>().CenterCamera();
             canvas.GetComponent<DiceTotal>().showTotal();
         }
